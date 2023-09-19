@@ -6,10 +6,10 @@
 
 /**
  * Este programa abre duas vezes o mesmo ficheiro
- * realizando escritos a partir dos dois descrtores obtidos.
+ * realizando escritas a partir dos dois descritores obtidos.
  * Observe o resultado.
  * Note que a ordem de aberturas e fechos não é relevante,
- * apenas a ordem de escritas enquanto os dois descitores estão activos
+ * apenas interessa a ordem das escritas enquanto os dois descitores estão activos
  */
 
 #define FILENAME "xx"
