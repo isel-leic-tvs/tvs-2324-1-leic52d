@@ -12,6 +12,8 @@
  * apenas interessa a ordem das escritas enquanto os dois descitores estão activos
  */
 
+#define WITH_DUP
+
 #define FILENAME "xx"
 
 int main() {
@@ -25,12 +27,16 @@ int main() {
 		exit(1);
 	}
 
+#ifdef WITH_DUP
+	int fd2 = dup(fd);
+#else
 	int fd2 = open(FILENAME, O_WRONLY, 0664);
 	
 	if (fd2 == -1) {
 		perror("error opening file xx");
 		exit(1);
 	}
+#endif
 	if (write(fd2, "5678", 4) == -1) {
 		perror("error writing file xx");
 		exit(1);
