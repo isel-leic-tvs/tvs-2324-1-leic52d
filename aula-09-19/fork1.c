@@ -17,7 +17,7 @@
  * 
  */
 
-// #define DELAYED_WAIT
+//#define DELAYED_WAIT
 
 
 int main() {
@@ -32,7 +32,8 @@ int main() {
 	}
 	else if (pchild == 0) {
 		printf("child pid (on child) = %d\n", getpid());
-	
+		sleep(20);
+		printf("terminate (on child)\n");
 		exit(0);
 	}
 	else {
@@ -42,10 +43,11 @@ int main() {
 #ifdef DELAYED_WAIT
 	sleep(20); // 20 seconds
 #endif
-	
+
+#ifdef WITH_WAIT
 	waitpid(pchild, NULL, 0); // <=> wait(NULL);
 	
 	printf("process child terminate!\n");
-	
+#endif
 	return 0;
 }
