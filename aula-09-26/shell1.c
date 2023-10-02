@@ -5,8 +5,9 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <string.h>
-#include <signal.h>
 #include <stdbool.h>
+#include <signal.h>
+
 
 /**
  * The program below is a minimal shell
@@ -18,14 +19,25 @@
 #define EXIT_CMD "exit"
 #define BACKGROUND_EXEC '&'
 
- 
- 
+
+void sigint_handler(int n) {
+	printf("SIGINT(%d)!\n", n);
+}
+
+void sigchld_handler(int n) {
+	printf("SIGCHLD(%d)!\n", n);
+	while (waitpid(-1, NULL, WNOHANG) >0);
+}
  
 int main(int argc, char *argv[]) {
 	char line[256];
 	bool in_background;
 	
- 
+	// ignorar o signal SIGINT
+	signal(SIGINT, sigint_handler);
+	
+	// processing terminated childs
+	signal(SIGCHLD, sigchld_handler);
 	while(1) {
 		printf("> ");
 		fgets(line, 256, stdin);

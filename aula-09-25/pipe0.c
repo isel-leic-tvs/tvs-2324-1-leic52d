@@ -4,6 +4,11 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
+/**
+ * this program uses a pipe to create a communication
+ * channel between the child (the producer) and the parent (the consumer)
+ */
+ 
 #define MAX_MSG_SIZE 256
 
 int main() {
@@ -29,17 +34,24 @@ int main() {
 	}
 	else { // parent code
 		
-		close(p[1]); // o descritor que permite escrita não é necessário no filho
+		// the pipe fd that supports writes MUST be closed here
+		// if not, with parent as a potencial writer on pipe,
+		// the read loop on pipe below will deadlock!
+		close(p[1]);  
 		
 		char child_msg[MAX_MSG_SIZE];
-		int curr_pos = 0; // posição onde colocar os bytes
-		int nr;           // bytes lidos pelo read
+		int curr_pos = 0; // current buffer position
+		int nr;           // total of read bytes
 		
 		
 		
 		waitpid(pchild, NULL, 0); // wait for child termination
 		
 		
+		// in this case, a simple read may be sufficient
+		// since the child send the whole msg in the same write,
+		// but with a greater message size, even with a single write
+		// the message may not be completely get in a signgle read
 		while( (nr = read(p[0], child_msg + curr_pos, 16)) > 0) {
 			printf("read bytes = %d\n", nr);
 			curr_pos += nr;
