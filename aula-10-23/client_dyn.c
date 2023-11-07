@@ -14,7 +14,7 @@ void  susp_point(char *msg) {
 }
 
 int main() {
-	chdir("/home/isel/src/tvs/tvs2024/aulas/tvs-2324-1-leic52d");
+	chdir("/home/isel/src/tvs/tvs2024/aulas/tvs-2324-1-leic52d/aula-10-23");
 	susp_point("start");
 	
 	void *lib = dlopen("./libmath.so", RTLD_LAZY);
@@ -31,7 +31,7 @@ int main() {
 		return 1;
 	}
 	
-	susp_point("load symbol");
+	susp_point("symbol loaded");
 
 	
 	int v= ct_func();

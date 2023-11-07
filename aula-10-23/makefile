@@ -18,8 +18,9 @@ libmath.so: math.c
 	gcc -o libmath.so $(CFLAGS) -fpic math.c -shared
 		
 client: client.c
+	#gcc -o client $(CFLAGS) client.c ./libmath.so
 	#gcc -o client $(CFLAGS) client.c '-Wl,-rpath,$$ORIGIN/.' libmath.so
-	gcc -o client $(CFLAGS) client.c  libmath.so
+	gcc -o client $(CFLAGS) client.c  -lmath
 
 
 client_dyn: client_dyn.c
@@ -34,5 +35,5 @@ prepare:
 	sudo ldconfig
 	
 install:
-	sudo cp libmath.so /usr/local/bin
+	sudo cp libmath.so /usr/local/lib
 	

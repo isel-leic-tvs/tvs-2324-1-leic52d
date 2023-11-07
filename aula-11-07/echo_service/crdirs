@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ ! -d /tmp/echo_fifo ] 
+then 
+	mkdir /tmp/echo_fifo 
+fi
+
+if [ ! -d /tmp/echo_uds ] 
+then 
+	mkdir /tmp/echo_uds 
+fi
