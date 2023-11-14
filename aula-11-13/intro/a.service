@@ -1,0 +1,12 @@
+[Unit]
+Description= test service a
+After=b.service
+
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=sleep 1
+
+[Install]
+WantedBy=test.target
