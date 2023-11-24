@@ -1,0 +1,9 @@
+#!/bin/bash
+./echo_cli &
+./echo_cli &
+./echo_cli &
+./echo_cli &
+./echo_cli &
+./echo_cli &
+./echo_cli &
+./echo_cli &

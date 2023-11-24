@@ -1,0 +1,12 @@
+[Unit]
+Description=Echo daemon activation socket
+ 
+
+[Socket]
+ListenStream=/opt/echod_auto/echod.sock
+SocketMode=0660
+SocketUser=root
+SocketGroup=tvs
+
+[Install]
+WantedBy=sockets.target

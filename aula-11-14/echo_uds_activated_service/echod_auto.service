@@ -1,0 +1,14 @@
+[Unit]
+Description=Test Echo Service
+After=syslog.service 
+
+
+[Service]
+Type=simple
+ExecStart=/opt/echod_auto/echod_auto
+Restart=on-failure
+
+RestrictAddressFamilies=AF_UNIX
+
+[Install]
+WantedBy=multi-user.target

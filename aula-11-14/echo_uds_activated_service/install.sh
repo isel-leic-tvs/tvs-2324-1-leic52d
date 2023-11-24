@@ -1,12 +1,12 @@
 #!/bin/bash
 
-
 if [ $UID != 0 ] ; then
 	echo "must be called as superuser"
 	exit 1
 fi
 
-ECHOD=./echod
+
+ECHOD=echod_auto
 ECHOD_SRC=./echo_srv.c
 
 if [ ! -x $ECHOD ]; then
@@ -15,26 +15,28 @@ if [ ! -x $ECHOD ]; then
 	else
 		echo wrong dir!
 	fi
-	exit 1
+	exit
 fi
 
-ECHOD_DIR=/opt/echod
+ECHOD_DIR=/opt/$ECHOD
 SYSTD_DIR=/etc/systemd/system
 
-mkdir -p $ECHOD_DIR
+
 
 if [ ! -d $ECHOD_DIR ]; then
-	echo Failed to create $ECHOD_DIR
-	exit 1
+	if ! mkdir -p $ECHOD_DIR ; then
+		echo Failed to create $ECHOD_DIR
+		exit
+	fi
 fi	
 
 cp $ECHOD $ECHOD_DIR
-
-echo cp $ECHOD.service $SYSTD_DIR 
 cp $ECHOD.service $SYSTD_DIR 
+cp $ECHOD.socket $SYSTD_DIR
 
-#force systemd update state
 systemctl daemon-reload
+
+sudo systemctl start echod_auto.socket
 
 echo echod install done!
 
