@@ -1,0 +1,1 @@
+qemu-system-x86_64 -m 2048 lubuntu-20.04.4-desktop-amd64.iso 

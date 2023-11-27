@@ -1,0 +1,2 @@
+qemu-system-x86_64  -kernel vmlinuz-5.15.0-52-generic -initrd initrd.img-5.15.0-52-generic -m 2048 -hda debian_x86 -append "root=/dev/sda"
+
