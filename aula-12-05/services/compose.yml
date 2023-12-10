@@ -1,0 +1,12 @@
+services:
+  mytvs_svc:
+    image: tvsapp0
+    environment: 
+      - NODE_PORT=4004
+    ports:
+      - 4004 
+    networks:
+      - mynet
+      
+networks:
+    mynet:
